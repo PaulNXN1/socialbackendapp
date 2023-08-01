@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-
+// Email validation 
 let validateEmail = function(email) {
     var emailTest = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return emailTest.test(email)};
 
-
+// Schema creation for USER Model
 const userSchema = new mongoose.Schema({
     userName: {
       type: String,

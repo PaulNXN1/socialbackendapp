@@ -1,3 +1,4 @@
+// Requiring & Importing Linkage 
 const mongoose = require('mongoose');
 const reactionSchema = require('./Reaction')
 
@@ -27,5 +28,7 @@ reactions: [reactionSchema]
 });
 
 const Thought = mongoose.model('Thought', thoughtSchema);
+
+//Exporting 
 
 module.exports = Thought;
