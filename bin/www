@@ -5,9 +5,9 @@
  */
 
 const mongoose = require('mongoose');
-var app = require('../app');
-var debug = require('debug')('socialbackendapp:server');
-var http = require('http');
+let app = require('../app');
+let debug = require('debug')('socialbackendapp:server');
+let http = require('http');
 
 require('dotenv').config();
 
