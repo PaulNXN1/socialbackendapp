@@ -1,4 +1,6 @@
-// Data for models
+// Data for models [user and thoughts]
+
+// Contains two arrays for data
 
 const users = [
     {username: 'Paul', email: 'paul@rock.com'},
