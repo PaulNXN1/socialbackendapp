@@ -7,6 +7,8 @@ The student had to build an API for a social network web application.
 
  The assignment had each student use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the Express.js and Mongoose packages, all students were allowed use a JavaScript date library of their choice.  
 
+ This application will not be deployed, thus Insomnia will be used to show examples of the application's API routes.  
+
 
 ## Code Contributors
 This was not a group project.  This assignment was completed by each student individually.  
