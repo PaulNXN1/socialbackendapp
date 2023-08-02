@@ -29,3 +29,9 @@ The project is complete when all Module #18 assignment criteria are met.
 
 ## Deployment 
 URL to the GitHub Repository:  https://github.com/PaulNXN1/socialbackendapp
+
+VIDEO for Insomnia demonstration:
+
+<video width="320" height="240" controls>
+  <source src="./public/images/Insomnia 2023-08-02 16-57-50.mp4" type="video/mp4">
+</video>
