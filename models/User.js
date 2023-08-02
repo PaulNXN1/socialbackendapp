@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Thought = require('./Thought');
 
 // Email validation 
 let validateEmail = function(email) {
@@ -21,7 +22,18 @@ const userSchema = new mongoose.Schema({
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
 
-    }
+    },
+
+    thoughts: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Thought'
+    }],
+
+    friends: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }]
+
   });
   
   // connecting model with database

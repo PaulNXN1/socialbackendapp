@@ -2,7 +2,6 @@
 const { Thought, User } = require('../models');
 
 
-
 // export all thought controllers to be routed/pathed
 
 module.exports = {

@@ -1,4 +1,6 @@
 // Data for models [user and thoughts]
+// EXAMPLES ONLY - NOT PULLING FOR DATABASE
+
 
 // Contains two arrays for data
 
