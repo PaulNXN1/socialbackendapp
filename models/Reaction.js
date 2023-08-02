@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+// Creating reaction schema 
 const reactionSchema = new mongoose.Schema({
     reactionId: {
 
