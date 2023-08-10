@@ -15,7 +15,6 @@ const reactionSchema = new mongoose.Schema({
         minLength: 1,
         maxLength: 280
 
-
     },
 
     username: {
@@ -38,6 +37,6 @@ const reactionSchema = new mongoose.Schema({
 
 
 
-
+// const Reaction = mongoose.model('Reaction', reactionSchema);
 
 module.exports = reactionSchema;
