@@ -1,5 +1,6 @@
 // Importing models
-const { Thought, User, reactionSchema } = require('../models');
+const {Reaction, reactionScehma, Thought, User} = require('../models')
+
 
 
 
@@ -8,10 +9,8 @@ module.exports = {
 
     async getReactions(req, res) {
 
-
-        Thought.findById(req.body)
+        Thought.findById(req.params.thoughtId)
             .then(thought => {
-
                 res.send(thought.reactions)
             })
         // try {
@@ -46,8 +45,9 @@ module.exports = {
 
     async createReaction(req, res) {
 
-        Thought.findById("64d43fee240483aae659df53")
+        Thought.findById(req.params.thoughtId)
             .then(thought => {
+                console.log(thought)
                 thought.reactions.push(req.body);
                 res.send(thought.save())
             })
@@ -96,24 +96,45 @@ module.exports = {
 
     async deleteReaction(req, res) {
         try {
-            const reaction = await Reaction.findOneAndRemove({ _id: req.params.reactionId });
+            const thought = await Thought.findById({ _id: req.params.thoughtId });
 
-            if (!reaction) {
+            if (!thought) {
                 return res.status(404).json({ message: 'Come on! No reaction with that Id!' });
             }
+            
+            
+            let reactionIndex = thought.reactions.findIndex(reaction => {
+                console.log(reaction, req.params.reactionId)
+                console.log('****************', reaction._id, '****************')
+                return reaction._id.toString() === req.params.reactionId
+            })
+            console.log(reactionIndex)
 
-            const user = await User.findOneAndUpdate(
-                { thoughts: req.params.thoughtId },
-                { $pull: { reaction: req.params.reactionId } },
-                { new: true }
-            )
+            if (reactionIndex !== -1) {
+                thought.reactions.splice(reactionIndex, 1);
+                await thought.save(); // Wait for the save operation to complete
+                return res.json({ message: 'Reaction deleted from thought.' });
+              } else {
+                return res.status(404).json({ message: 'Reaction not found in the thought.' });
+              }
 
-            if (!user) {
-                return res.status(404).json({
-                    message: 'Reaction deleted.'
-                });
-            }
-            res.json({ message: 'Thought deleted.' })
+            
+            
+
+            
+
+            // const user = await User.findOneAndUpdate(
+            //     { thoughts: req.params.thoughtId },
+            //     { $pull: { reaction: req.params.reactionId } },
+            //     { new: true }
+            // )
+
+            // if (!user) {
+            //     return res.status(404).json({
+            //         message: 'Reaction deleted.'
+            //     });
+            // }
+            // res.json({ message: 'Thought deleted.' })
         } catch (err) {
             console.log(err);
             res.status(500).json(err);
