@@ -13,7 +13,7 @@ router.post('/:userId/friends/:friendId', function (req, res) {
     
     {
       $push: {friends: req.params.friendId}
-    })
+    }, {new:true})
 //friends updated 
 
     .then(friends => {
@@ -34,7 +34,7 @@ router.delete('/:userId/friends/:friendId' , function (req, res) {
     {
       $pull: {friends: req.params.friendId}
 
-    })
+    }, {new:true})
 
     .then(deleteFriends => {
       res.json(deleteFriends)

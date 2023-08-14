@@ -96,27 +96,31 @@ module.exports = {
 
     async deleteReaction(req, res) {
         try {
-            const thought = await Thought.findById({ _id: req.params.thoughtId });
+            const thought = await Thought.findByIdAndUpdate({ _id: req.params.thoughtId }, 
+                
+                {
+                    $pull : {reactions: {reactionId: req.params.reactionId }}
+
+                });
 
             if (!thought) {
                 return res.status(404).json({ message: 'Come on! No reaction with that Id!' });
             }
             
             
-            let reactionIndex = thought.reactions.findIndex(reaction => {
-                console.log(reaction, req.params.reactionId)
-                console.log('****************', reaction._id, '****************')
-                return reaction._id.toString() === req.params.reactionId
-            })
-            console.log(reactionIndex)
+            // let reactionIndex = thought.reactions.findIndex(reaction => {
+            //    
+            //     return reaction._id.toString() === req.params.reactionId
+            // })
+            // console.log(reactionIndex)
 
-            if (reactionIndex !== -1) {
-                thought.reactions.splice(reactionIndex, 1);
-                await thought.save(); // Wait for the save operation to complete
-                return res.json({ message: 'Reaction deleted from thought.' });
-              } else {
-                return res.status(404).json({ message: 'Reaction not found in the thought.' });
-              }
+            // if (reactionIndex !== -1) {
+            //     thought.reactions.splice(reactionIndex, 1);
+            //     await thought.save(); // Wait for the save operation to complete
+            //     return res.json({ message: 'Reaction deleted from thought.' });
+            //   } else {
+            //     return res.status(404).json({ message: 'Reaction not found in the thought.' });
+            //   }
 
             
             
