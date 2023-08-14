@@ -2,6 +2,71 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
+
+
+// add friend & remove friend routing 
+
+// /api/users/:userId/friends/:friendId
+
+router.post('/:userId/friends/:friendId', function (req, res) {
+  User.findByIdAndUpdate(req.params.userId,
+    
+    {
+      $push: {friends: req.params.friendId}
+    })
+//friends updated 
+
+    .then(friends => {
+      res.json(friends)
+    })
+
+    .catch(err => {
+      res.json(err)
+    })
+
+})
+
+
+router.delete('/:userId/friends/:friendId' , function (req, res) {
+
+  User.findByIdAndUpdate(req.params.userId, 
+    
+    {
+      $pull: {friends: req.params.friendId}
+
+    })
+
+    .then(deleteFriends => {
+      res.json(deleteFriends)
+    })
+
+    .catch(err => {
+      res.json(err)
+    })
+
+
+}) 
+
+
+
+
+  // GET SINGLE USER
+
+
+  router.get('/:userId', function (req, res) {
+    User.findById(req.params.userId)
+      
+    .then(singleUser => {
+      res.json(singleUser)
+    })
+
+    .catch(err => {
+      res.json(err)
+    });
+  });
+
+
+
 /* GET users listing. */
 router.get('/', function (req, res) {
   User.find()
@@ -11,6 +76,9 @@ router.get('/', function (req, res) {
   .catch(err => {
     res.json(err)
   })
+
+
+
 
 
   // res.send('USER PAGE');
